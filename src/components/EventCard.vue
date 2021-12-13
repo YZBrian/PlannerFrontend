@@ -1,17 +1,3 @@
-<template>
-
-    <div v-for="event in eventList.events" :key="event.id" class="eventList">
-        <div class="card text-white bg-dark mb-3" align="center">
-            <div class="card-body">
-                <h5 class="card-title">{{event.dateTime}}</h5>
-                <p class="card-text">{{event.description}}</p>
-                 <a href="#" class="btn btn-primary" >Delete</a>
-            </div>
-        </div>
-    </div>
-
-</template>
-
 <script>
 import axios from 'axios'
 

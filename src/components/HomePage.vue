@@ -1,5 +1,4 @@
 <template>
-    <div>Events component:</div>
     <Events/>
 </template>
 
