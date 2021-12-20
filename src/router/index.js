@@ -6,6 +6,10 @@ const routes = [
       path: "/",
       name: "Home",
       component: HomePage,
+
+      path: "/CreateEvent",
+      name: "CreateEvent",
+      component: CreateEvent,
     },
   ];
   
