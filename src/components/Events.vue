@@ -17,12 +17,9 @@
       <div class="card-body">
         <h5 class="card-title">{{ event.dateTime }}</h5>
         <p class="card-text">{{ event.description }}</p>
-        <a
-          href="#"
-          class="btn btn-primary"
-          style="border-color: red; background-color: red"
-          >Delete</a
-        >
+        <button class="btn btn-primary" @click="DeleteEvent(event.id)">
+          Delete
+        </button>
       </div>
     </div>
   </div>
@@ -39,7 +36,7 @@ export default {
     };
   },
   methods: {
-    async getEvents() {
+    async GetEvents() {
       const res = await axios
         .get("https://localhost:44398/Event/GetAllEvents")
         .then((result) => {
@@ -48,9 +45,23 @@ export default {
       this.eventList = res;
       console.log(this.eventList);
     },
+    async DeleteEvent(id) {
+      try {
+        const res = await axios
+          .delete("https://localhost:44398/Event/DeleteEvent?id=" + id)
+          .then((result) => {
+            return result.data;
+          });
+        this.Event = res;
+        this.loaded = true;
+      } catch (error) {
+        console.log(error);
+      }
+      this.loaded = true;
+    },
   },
   mounted() {
-    this.getEvents();
+    this.GetEvents();
   },
 };
 </script>

@@ -9,7 +9,7 @@ export default {
         }
     },
     methods: {
-        async getEvents() {
+        async GetEvents() {
             const res = await axios
             .get('https://localhost:44398/Event/GetAllEvents')
             .then((result) => {
@@ -20,7 +20,7 @@ export default {
         }
     },
     mounted() {
-        this.getEvents()
+        this.GetEvents()
     }
 }
 
