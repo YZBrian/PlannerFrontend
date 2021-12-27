@@ -2,9 +2,11 @@
   <div class="card-columns">
     <div class="card text-white bg-dark mb-3" align="center">
       <div class="card-body">
-        <h5 class="card-title"></h5>
-        <p class="card-text"></p>
-        <a href="#" class="btn btn-primary">Add new event</a>
+        <input class="card-title" type="datetime-local" v-model="datetime" />
+        <input class="card-text" type="text" v-model="description" />
+        <button class="btn btn-primary" v-on:click="CreateEvent">
+          Create New Event
+        </button>
       </div>
     </div>
 
@@ -17,7 +19,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ event.dateTime }}</h5>
         <p class="card-text">{{ event.description }}</p>
-        <button class="btn btn-primary" @click="DeleteEvent(event.id)">
+        <button class="btn btn-primary" @click="DeleteEvent(event.id)" >
           Delete
         </button>
       </div>
@@ -33,6 +35,8 @@ export default {
   data() {
     return {
       eventList: [],
+      datetime: "",
+      description: "",
     };
   },
   methods: {
@@ -58,8 +62,25 @@ export default {
         console.log(error);
       }
       this.loaded = true;
+      location.reload();
+    },
+    async CreateEvent() {
+      const res = await axios
+        .post(
+          "https://localhost:44398/Event/CreateEvent?datetime=" +
+            this.datetime +
+            "&description=" +
+            this.description
+        )
+        .then((result) => {
+          return result.data;
+        });
+      this.eventList = res;
+      console.log(this.eventList);
+      location.reload();
     },
   },
+
   mounted() {
     this.GetEvents();
   },
