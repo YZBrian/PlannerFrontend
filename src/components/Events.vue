@@ -2,6 +2,7 @@
   <div class="card-columns">
     <div class="card text-white bg-dark mb-3" align="center">
       <div class="card-body">
+        Has Priority <input class="card-header" type="checkbox" v-model="hasPriority" /><br>
         <input class="card-title" type="datetime-local" v-model="datetime" />
         <input class="card-text" type="text" v-model="description" />
         <button class="btn btn-primary" v-on:click="CreateEvent">
@@ -17,6 +18,7 @@
       align="center"
     >
       <div class="card-body">
+        <div class="card-header">{{event.hasPriority}}</div>
         <h5 class="card-title">{{ event.dateTime }}</h5>
         <p class="card-text">{{ event.description }}</p>
         <button class="btn btn-primary" @click="DeleteEvent(event.id)" >
@@ -37,6 +39,7 @@ export default {
       eventList: [],
       datetime: "",
       description: "",
+      hasPriority: "false",
     };
   },
   methods: {
@@ -70,7 +73,9 @@ export default {
           "https://localhost:44398/Event/CreateEvent?datetime=" +
             this.datetime +
             "&description=" +
-            this.description
+            this.description +
+            "&hasPriority=" +
+            this.hasPriority
         )
         .then((result) => {
           return result.data;
