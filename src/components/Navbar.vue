@@ -3,7 +3,3 @@
 
     </nav>
 </template>
-
-<style>
-
-</style>
